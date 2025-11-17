@@ -8,9 +8,16 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-8">
-            <h1 className="text-xl font-bold text-text-primary">
-              💰 Tracky
-            </h1>
+            <div className="flex items-center gap-3">
+              <img 
+                src="/icon.png" 
+                alt="Tracky Logo" 
+                className="w-8 h-8"
+              />
+              <h1 className="text-xl font-bold text-text-primary">
+                Tracky
+              </h1>
+            </div>
             <div className="flex gap-4">
               <NavLink
                 to="/"
