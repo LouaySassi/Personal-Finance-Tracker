@@ -1,20 +1,56 @@
 {
-  "name": "magic-patterns-vite-template",
-  "version": "0.0.1",
+  "name": "finance-tracker-desktop",
+  "version": "1.0.0",
+  "description": "Local Finance Tracker Desktop Application",
   "private": true,
-  "type": "module",
+  "main": "electron/main.js",
   "scripts": {
-    "dev": "npx vite",
-    "build": "npx vite build",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "preview": "npx vite preview"
+    "dev:frontend": "vite",
+    "dev:backend": "node server/index.js",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "build:frontend": "vite build",
+    "build:electron": "npm run build:frontend && electron-builder",
+    "start": "electron .",
+    "preview": "vite preview"
+  },
+  "build": {
+    "appId": "com.financetracker.app",
+    "productName": "Finance Tracker",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "server/**/*",
+      "electron/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "public/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
   },
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2",
-    "lucide-react": "0.522.0",
-    "recharts": "^2.12.7"
+    "lucide-react": "^0.522.0",
+    "recharts": "^2.12.7",
+    "express": "^4.21.1",
+    "cors": "^2.8.5",
+    "better-sqlite3": "^11.5.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.18",
@@ -23,13 +59,16 @@
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@typescript-eslint/parser": "^5.54.0",
     "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "latest",
+    "concurrently": "^9.1.0",
+    "electron": "^32.2.0",
+    "electron-builder": "^25.1.7",
     "eslint": "^8.50.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.1",
+    "postcss": "latest",
+    "tailwindcss": "^3.4.17",
     "typescript": "^5.5.4",
-    "vite": "^5.2.0",
-    "tailwindcss": "3.4.17",
-    "autoprefixer": "latest",
-    "postcss": "latest"
+    "vite": "^5.2.0"
   }
 }
